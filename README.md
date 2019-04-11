@@ -19,21 +19,21 @@ user new_directory $ vagrant up && vagrant ssh
 Once you are in:
 ```
 vagrant@vagrant:~$ cd /vagrant
-vagrant@vagrant:/vagrant$ python application.py
+vagrant@vagrant:/vagrant$ python project.py
 ```
-Now that the program is running, go in to your browser and type ```localhost:8000``` in the address bar and hit enter.
+Now that the program is running, go in to your browser and type ```localhost:5000``` in the address bar and hit enter.
 
 This will take you to the front page of the application allowing you to decide to browse through the catalog or create a user and post additional items.
 
 If you are curious about the necessity of needing to create a user in order to add, edit or delete items, check out the following [paths](https://github.com/jtruelas/Item-Catalog-Project.git#paths) that are only accessible to logged in users or creators of a specific item.
 
 ## Paths
-[Add]
+[Add](localhost:5000/categories/new)
 
-[Edit]
+[Edit](localhost:5000/categories/edit)
 
-[Delete]
+[Delete](localhost:5000/categories/delete)
 
-[Edit User's Item]
+[Edit User's Item](localhost:5000/1/items/1/edit)
 
-[Delete User's Item]
+[Delete User's Item](localhost:5000/1/items/1/delete)
