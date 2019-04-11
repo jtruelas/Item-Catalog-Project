@@ -28,12 +28,12 @@ This will take you to the front page of the application allowing you to decide t
 If you are curious about the necessity of needing to create a user in order to add, edit or delete items, check out the following [paths](https://github.com/jtruelas/Item-Catalog-Project.git#paths) that are only accessible to logged in users or creators of a specific item.
 
 ## Paths
-[Add](localhost:5000/categories/new)
+[Add](http://localhost:5000/categories/new)
 
-[Edit](localhost:5000/categories/edit)
+[Edit](http://localhost:5000/categories/edit)
 
-[Delete](localhost:5000/categories/delete)
+[Delete](http://localhost:5000/categories/delete)
 
-[Edit User's Item](localhost:5000/1/items/1/edit)
+[Edit User's Item](http://localhost:5000/1/items/1/edit)
 
-[Delete User's Item](localhost:5000/1/items/1/delete)
+[Delete User's Item](http://localhost:5000/1/items/1/delete)
