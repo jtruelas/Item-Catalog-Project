@@ -18,7 +18,8 @@ CLIENT_ID = json.loads(
 APPLICATION_NAME = "Recreational Warehouse"
 
 # Connect to database
-engine = create_engine('sqlite:///recreationalwarehouse.db', connect_args={'check_same_thread':False})
+engine = create_engine('sqlite:///recreationalwarehouse.db',
+                       connect_args={'check_same_thread': False})
 Base.metadata.bind = engine
 
 # Create a database session
@@ -129,23 +130,18 @@ def gconnect():
 
 
 def getUserId(email):
-    try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except:
-        return None
 
 
 def getUserInfo(user_id):
-    try:
         user = session.query(User).filter_by(id=user_id).one()
         return user
-    except:
-        return None
 
 
 def createNewUser(login_session):
-    newuser = User(name=login_session['username'], email=login_session['email'],
+    newuser = User(name=login_session['username'],
+                   email=login_session['email'],
                    picture=login_session['picture'])
     session.add(newuser)
     session.commit()
@@ -201,7 +197,7 @@ def newCategory():
     if request.method == 'POST':
         if request.form['name']:
             category = Category(name=request.form['name'],
-                                    user_id=login_session['user_id'])
+                                user_id=login_session['user_id'])
             session.add(category)
             session.commit()
             flash('Category successfully created')
@@ -259,11 +255,13 @@ def showItems(category_id):
     items = session.query(CategoryItem).\
         filter_by(category_id=category_id).all()
     creator = getUserInfo(category.user_id)
-    if 'username' not in login_session or category.user_id != login_session['user_id']:
+    if 'username' not in login_session\
+       or category.user_id != login_session['user_id']:
         return render_template('publiclist.html',
                                category=category, items=items, creator=creator)
     else:
-        return render_template('list.html', category=category, items=items, creator=creator)
+        return render_template('list.html', category=category, items=items,
+                               creator=creator)
 
 
 # Creates a new category item
@@ -276,9 +274,10 @@ def newCategoryItem(category_id):
     if request.method == 'POST':
         if (request.form['name'], request.form['description']):
             categoryitem = CategoryItem(name=request.form['name'],
-                                description=request.form['description'],
-                                category=category,
-                                user_id=category.user_id)
+                                        description=request.form[
+                                        'description'],
+                                        category=category,
+                                        user_id=category.user_id)
             session.add(categoryitem)
             session.commit()
             flash('Category item successfully created')
@@ -346,7 +345,8 @@ def categoryJSON():
 @app.route('/categories/<int:category_id>/items/JSON')
 def categoryItemJSON(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
-    items = session.query(CategoryItem).filter_by(category_id=category_id).all()
+    items = session.query(CategoryItem).\
+        filter_by(category_id=category_id).all()
     return jsonify(CategoryItems=[item.serialize for item in items])
 
 
@@ -355,9 +355,6 @@ def menuItemJSON(category_id, item_id):
     category = session.query(Category).filter_by(id=category_id).one()
     item = session.query(CategoryItem).filter_by(id=item_id).one()
     return jsonify(CategoryItem=[item.serialize])
-
-
-
 
 
 if __name__ == '__main__':
